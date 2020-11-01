@@ -51,11 +51,15 @@ class LoginUseCaseSyncTest {
         assertThat(captures[1], `is`(PASSWORD))
     }
 
+    // AAA pattern for unit test
     @Test
     @Throws(Exception::class)
     fun loginSync_success_authTokenCached() {
+        // Arrange
         val ac = ArgumentCaptor.forClass(String::class.java)
+        // Art
         SUT.loginSync(USERNAME, PASSWORD)
+        // Assert
         verify(authTokenCacheMock).cacheAuthToken(ac.capture())
         assertThat(ac.value, `is`(AUTH_TOKEN))
     }
