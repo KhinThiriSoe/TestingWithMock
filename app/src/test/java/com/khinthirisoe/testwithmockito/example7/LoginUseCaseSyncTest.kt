@@ -9,10 +9,16 @@ import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
 import org.mockito.ArgumentMatchers.any
+import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.*
+import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class LoginUseCaseSyncTest {
 
     companion object {
@@ -22,16 +28,13 @@ class LoginUseCaseSyncTest {
     }
 
     lateinit var SUT : LoginUseCaseSync
-    lateinit var loginHttpEndpointSyncMock: LoginHttpEndpointSync
-    lateinit var authTokenCacheMock: AuthTokenCache
-    lateinit var postEventBusPosterMock: EventBusPoster
+    @Mock lateinit var loginHttpEndpointSyncMock: LoginHttpEndpointSync
+    @Mock lateinit var authTokenCacheMock: AuthTokenCache
+    @Mock lateinit var postEventBusPosterMock: EventBusPoster
 
     @Before
     @Throws(Exception::class)
     fun setup() {
-        loginHttpEndpointSyncMock = mock(LoginHttpEndpointSync::class.java)
-        authTokenCacheMock = mock(AuthTokenCache::class.java)
-        postEventBusPosterMock = mock(EventBusPoster::class.java)
         SUT = LoginUseCaseSync(
             loginHttpEndpointSyncMock,
             authTokenCacheMock,
